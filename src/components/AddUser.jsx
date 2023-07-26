@@ -1,5 +1,5 @@
-import { FormControl, FormGroup, Input, InputLabel, Typography, styled } from '@mui/material';
-import React from 'react';
+import { FormControl, FormGroup, Input, InputLabel, Typography, styled, Button } from '@mui/material';
+import React, { useState } from 'react';
 
 const Container = styled(FormGroup)`
     width: 50%;
@@ -9,30 +9,52 @@ const Container = styled(FormGroup)`
     }
 `
 
+const defaultValue = {
+    name: '',
+    userName: '',
+    email: '',
+    phone: ''
+};
+
 const AddUser = () => {
+
+    const [user, setUser] = useState( defaultValue );
+
+    const onValueChange = (e) => {
+        setUser({...user, [e.target.name]: e.target.value});
+        console.log(user);
+    }
+
+    const addUserDetails = () => {
+        
+    }
+
   return (
     <>
-    <Container>
-        <Typography variant='h4'>Add User</Typography>
+      <Container>
+        <Typography variant="h4">Add User</Typography>
         <FormControl>
-            <InputLabel>Name</InputLabel>
-            <Input />
+          <InputLabel>Name</InputLabel>
+          <Input onChange={(e) => onValueChange(e)} name='name'/>
         </FormControl>
         <FormControl>
-            <InputLabel>User-Name</InputLabel>
-            <Input />
+          <InputLabel>User-Name</InputLabel>
+          <Input onChange={(e) => onValueChange(e)} name='userName'/>
         </FormControl>
         <FormControl>
-            <InputLabel>Email</InputLabel>
-            <Input />
+          <InputLabel>Email</InputLabel>
+          <Input onChange={(e) => onValueChange(e)} name='email'/>
         </FormControl>
         <FormControl>
-            <InputLabel>PhoneNo:.</InputLabel>
-            <Input />
+          <InputLabel>Phone:</InputLabel>
+          <Input onChange={(e) => onValueChange(e)} name='phone'/>
         </FormControl>
-    </Container>
+        <FormControl>
+          <Button variant="contained" onClick={() => addUserDetails()}>Add User</Button>
+        </FormControl>
+      </Container>
     </>
-  )
+  );
 }
 
 export default AddUser;
